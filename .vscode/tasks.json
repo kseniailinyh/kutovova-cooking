@@ -1,0 +1,74 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Preflight: Check Node/npm",
+      "type": "shell",
+      "command": "if ! command -v node >/dev/null 2>&1 || ! command -v npm >/dev/null 2>&1; then echo 'Node.js/npm were not found. Install Node LTS from https://nodejs.org, then restart Cursor and run the task again.'; exit 1; fi; node scripts/check-node.js",
+      "options": {
+        "cwd": "${workspaceFolder}",
+        "shell": {
+          "executable": "/bin/zsh",
+          "args": ["-lc"]
+        }
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "Install dependencies",
+      "type": "shell",
+      "command": "npm install",
+      "dependsOn": ["Preflight: Check Node/npm"],
+      "dependsOrder": "sequence",
+      "options": {
+        "cwd": "${workspaceFolder}",
+        "shell": {
+          "executable": "/bin/zsh",
+          "args": ["-lc"]
+        }
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "Build index",
+      "type": "shell",
+      "command": "npm run build:index",
+      "dependsOn": ["Install dependencies"],
+      "dependsOrder": "sequence",
+      "options": {
+        "cwd": "${workspaceFolder}",
+        "shell": {
+          "executable": "/bin/zsh",
+          "args": ["-lc"]
+        }
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "Dev (build index + vite)",
+      "type": "shell",
+      "command": "npm run dev:all",
+      "dependsOn": ["Install dependencies"],
+      "dependsOrder": "sequence",
+      "options": {
+        "cwd": "${workspaceFolder}",
+        "shell": {
+          "executable": "/bin/zsh",
+          "args": ["-lc"]
+        }
+      },
+      "isBackground": true,
+      "problemMatcher": {
+        "owner": "vite",
+        "pattern": {
+          "regexp": "."
+        },
+        "background": {
+          "activeOnStart": true,
+          "beginsPattern": "^.*$",
+          "endsPattern": "ready in|Local:"
+        }
+      }
+    }
+  ]
+}
