@@ -23,7 +23,7 @@ export function DataProvider({ children }: { children: ReactNode }) {
     async function load() {
       try {
         setLoading(true);
-        const response = await fetch('/generated/index.json');
+        const response = await fetch(`${import.meta.env.BASE_URL}generated/index.json`);
         if (!response.ok) {
           throw new Error(`Failed to load index: ${response.status}`);
         }

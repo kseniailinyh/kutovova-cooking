@@ -53,3 +53,20 @@ Then refresh the app (or restart dev server if needed).
 - `/ingredients`
 - `/ingredients/:id`
 - `/` redirects to `/recipes`
+
+## Deploy to GitHub Pages
+
+Production deploy is configured for the repository path `kutovova-cooking`.
+
+1. Build locally for Pages:
+
+```bash
+npm run build:pages
+```
+
+2. Push to `main` to trigger `.github/workflows/deploy-pages.yml`.
+3. In GitHub repository settings, set **Pages** source to **GitHub Actions**.
+
+Site URL pattern:
+
+`https://<username>.github.io/kutovova-cooking/`

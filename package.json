@@ -7,8 +7,8 @@
     "build:index": "tsx src/lib/buildIndex.ts",
     "dev": "vite",
     "dev:all": "run-s build:index dev",
-    "prebuild": "npm run build:index",
-    "build": "tsc -b && vite build",
+    "build": "vite build",
+    "build:pages": "GITHUB_PAGES=true npm run build:index && GITHUB_PAGES=true npm run build",
     "preview": "vite preview"
   },
   "dependencies": {
